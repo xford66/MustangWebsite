@@ -44,9 +44,11 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 80% 60% at 70% 50%, #3a1a08 0%, transparent 60%),
-        radial-gradient(ellipse 40% 80% at 10% 80%, #1a0a04 0%, transparent 50%),
-        linear-gradient(160deg, #0D0B08 0%, #1c1006 50%, #0D0B08 100%);
+        linear-gradient(to bottom, rgba(13,11,8,0.3) 0%, rgba(13,11,8,0.7) 100%),
+        url('mustang-burnout.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     /* Animated road lines */
@@ -77,20 +79,9 @@
       100% { transform: translateY(-200px) perspective(200px) rotateX(30deg); }
     }
 
-    /* SVG Mustang silhouette */
+    /* SVG Mustang silhouette - hidden since we have real photo */
     .car-silhouette {
-      position: absolute;
-      right: -2%;
-      bottom: 12%;
-      width: 65%;
-      max-width: 750px;
-      opacity: 0;
-      transform: translateX(80px);
-      animation: carSlide 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
-      filter: drop-shadow(-20px 10px 40px rgba(200,16,46,0.3));
-    }
-    @keyframes carSlide {
-      to { opacity: 1; transform: translateX(0); }
+      display: none;
     }
 
     .hero-eyebrow {
@@ -104,6 +95,7 @@
       animation: fadeUp 0.8s ease 0.8s forwards;
       position: relative;
       z-index: 2;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
     }
 
     .hero-title {
@@ -116,6 +108,7 @@
       z-index: 2;
       opacity: 0;
       animation: fadeUp 0.9s ease 1s forwards;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.9);
     }
 
     .hero-title span {
@@ -130,12 +123,13 @@
       font-size: clamp(14px, 2vw, 20px);
       font-weight: 300;
       letter-spacing: 0.2em;
-      color: rgba(245,237,214,0.5);
+      color: rgba(245,237,214,0.9);
       margin-top: 1rem;
       position: relative;
       z-index: 2;
       opacity: 0;
       animation: fadeUp 0.9s ease 1.2s forwards;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
     }
 
     .scroll-hint {
@@ -155,7 +149,8 @@
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 11px;
       letter-spacing: 0.3em;
-      color: rgba(245,237,214,0.4);
+      color: rgba(245,237,214,0.7);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     }
     .scroll-line {
       width: 1px;
@@ -487,6 +482,7 @@
       font-size: 1.5rem;
       letter-spacing: 0.1em;
       color: var(--cream);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
     }
     .nav-logo span { color: var(--red); }
     .nav-links {
@@ -499,10 +495,11 @@
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 13px;
       letter-spacing: 0.25em;
-      color: rgba(245,237,214,0.5);
+      color: rgba(245,237,214,0.7);
       text-decoration: none;
       text-transform: uppercase;
       transition: color 0.2s;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     }
     .nav-links a:hover { color: var(--cream); }
   </style>
@@ -524,7 +521,7 @@
     <div class="hero-bg"></div>
     <div class="road-lines"></div>
 
-    <!-- SVG Mustang Fastback Silhouette -->
+    <!-- SVG Mustang Fastback Silhouette (hidden - using real photo instead) -->
     <svg class="car-silhouette" viewBox="0 0 900 340" fill="none" xmlns="http://www.w3.org/2000/svg">
       <!-- Body -->
       <path d="M60 240 L80 180 L160 120 L320 80 L500 70 L640 80 L720 110 L780 160 L820 200 L830 240 Z" fill="#1a1714"/>
