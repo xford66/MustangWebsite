@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>1969 Ford Mustang Fastback</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #C8102E;
+      --gold: #D4A017;
+      --cream: #F5EDD6;
+      --dark: #0D0B08;
+      --charcoal: #1A1714;
+      --smoke: #2C2825;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--cream);
+      font-family: 'Barlow', sans-serif;
+      overflow-x: hidden;
+      cursor: crosshair;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 6vw 6vh;
+      overflow: hidden;
+      background: var(--dark);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 50%, #3a1a08 0%, transparent 60%),
+        radial-gradient(ellipse 40% 80% at 10% 80%, #1a0a04 0%, transparent 50%),
+        linear-gradient(160deg, #0D0B08 0%, #1c1006 50%, #0D0B08 100%);
+    }
+
+    /* Animated road lines */
+    .road-lines {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 35%;
+      overflow: hidden;
+      opacity: 0.15;
+    }
+    .road-lines::before {
+      content: '';
+      position: absolute;
+      width: 4px;
+      height: 60px;
+      background: var(--cream);
+      left: 50%;
+      bottom: -60px;
+      box-shadow:
+        -300px 0 0 var(--cream), 300px 0 0 var(--cream),
+        -600px 0 0 var(--cream), 600px 0 0 var(--cream);
+      animation: road 1.2s linear infinite;
+    }
+    @keyframes road {
+      0%   { transform: translateY(0) perspective(200px) rotateX(30deg); }
+      100% { transform: translateY(-200px) perspective(200px) rotateX(30deg); }
+    }
+
+    /* SVG Mustang silhouette */
+    .car-silhouette {
+      position: absolute;
+      right: -2%;
+      bottom: 12%;
+      width: 65%;
+      max-width: 750px;
+      opacity: 0;
+      transform: translateX(80px);
+      animation: carSlide 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+      filter: drop-shadow(-20px 10px 40px rgba(200,16,46,0.3));
+    }
+    @keyframes carSlide {
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .hero-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(12px, 1.5vw, 16px);
+      font-weight: 600;
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.8s forwards;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(60px, 12vw, 160px);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      color: var(--cream);
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 1s forwards;
+    }
+
+    .hero-title span {
+      display: block;
+      color: var(--red);
+      font-size: 0.55em;
+      letter-spacing: 0.15em;
+    }
+
+    .hero-sub {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(14px, 2vw, 20px);
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: rgba(245,237,214,0.5);
+      margin-top: 1rem;
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 1.2s forwards;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 3vh;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeUp 1s ease 1.8s forwards;
+      z-index: 2;
+    }
+    .scroll-hint span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: rgba(245,237,214,0.4);
+    }
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse { 50% { opacity: 0.3; } }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--red);
+      padding: 1.2rem 6vw;
+      display: flex;
+      gap: 3rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .stats-bar::-webkit-scrollbar { display: none; }
+    .stat {
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: var(--cream);
+    }
+    .stat-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: rgba(245,237,214,0.7);
+      text-transform: uppercase;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 8vh 6vw;
+    }
+
+    .section-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.5em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .section-tag::after {
+      content: '';
+      flex: 1;
+      max-width: 60px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 6vw, 72px);
+      line-height: 1;
+      color: var(--cream);
+      margin-bottom: 2rem;
+    }
+
+    /* ── STORY ── */
+    .story {
+      background: var(--charcoal);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6vw;
+      align-items: center;
+    }
+    @media (max-width: 768px) {
+      .story { grid-template-columns: 1fr; }
+    }
+
+    .story-text p {
+      font-size: clamp(15px, 1.5vw, 17px);
+      line-height: 1.8;
+      color: rgba(245,237,214,0.7);
+      margin-bottom: 1.2rem;
+    }
+    .story-text p strong {
+      color: var(--cream);
+      font-weight: 600;
+    }
+
+    .quote-block {
+      border-left: 3px solid var(--red);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      background: rgba(200,16,46,0.05);
+    }
+    .quote-block p {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(18px, 2.5vw, 26px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream) !important;
+      letter-spacing: 0.02em;
+      line-height: 1.5 !important;
+      margin: 0 !important;
+    }
+
+    /* Numbers visual */
+    .numbers-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+    .num-block {
+      background: var(--smoke);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: background 0.3s;
+    }
+    .num-block:hover { background: var(--red); }
+    .num-block:first-child { background: var(--red); }
+    .num-block .big {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 5vw, 64px);
+      color: var(--cream);
+      display: block;
+    }
+    .num-block .desc {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      color: rgba(245,237,214,0.6);
+      text-transform: uppercase;
+    }
+
+    /* ── ENGINES ── */
+    .engines {
+      background: var(--dark);
+    }
+    .engine-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2px;
+      margin-top: 3rem;
+    }
+    .engine-card {
+      background: var(--charcoal);
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s;
+      border-bottom: 3px solid transparent;
+    }
+    .engine-card:hover {
+      transform: translateY(-4px);
+      border-bottom-color: var(--red);
+    }
+    .engine-card.featured { border-bottom-color: var(--gold); }
+    .engine-card.featured::before {
+      content: 'MOST WANTED';
+      position: absolute;
+      top: 1rem;
+      right: -1.8rem;
+      background: var(--gold);
+      color: var(--dark);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      padding: 4px 3rem;
+      transform: rotate(35deg);
+      font-weight: 700;
+    }
+    .engine-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--cream);
+      margin-bottom: 0.3rem;
+    }
+    .engine-hp {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      margin-bottom: 1.2rem;
+    }
+    .engine-desc {
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(245,237,214,0.5);
+    }
+
+    /* ── GALLERY ── */
+    .gallery {
+      background: var(--charcoal);
+      overflow: hidden;
+    }
+    .gallery-scroll {
+      display: flex;
+      gap: 2px;
+      margin-top: 3rem;
+      animation: galleryMove 20s linear infinite;
+      width: max-content;
+    }
+    .gallery-scroll:hover { animation-play-state: paused; }
+    @keyframes galleryMove {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .gallery-item {
+      width: 300px;
+      height: 200px;
+      background: var(--smoke);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.1em;
+      color: rgba(245,237,214,0.2);
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .gallery-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gi-color, var(--smoke));
+      opacity: 0.6;
+    }
+    .gallery-item:nth-child(odd)  { --gi-color: #1f1008; }
+    .gallery-item:nth-child(even) { --gi-color: #0f0f0f; }
+    .gallery-icon {
+      font-size: 3rem;
+      opacity: 0.15;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── SPECS ── */
+    .specs { background: var(--dark); }
+    .specs-table {
+      margin-top: 3rem;
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .specs-table tr {
+      border-bottom: 1px solid rgba(245,237,214,0.06);
+      transition: background 0.2s;
+    }
+    .specs-table tr:hover { background: rgba(245,237,214,0.03); }
+    .specs-table td {
+      padding: 1.1rem 1rem;
+      font-size: 15px;
+    }
+    .specs-table td:first-child {
+      font-family: 'Barlow Condensed', sans-serif;
+      letter-spacing: 0.1em;
+      color: rgba(245,237,214,0.4);
+      text-transform: uppercase;
+      font-size: 12px;
+      width: 45%;
+    }
+    .specs-table td:last-child {
+      color: var(--cream);
+      font-weight: 400;
+    }
+    .specs-table tr:first-child td:last-child {
+      color: var(--gold);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal);
+      padding: 4rem 6vw 3rem;
+      border-top: 1px solid rgba(245,237,214,0.06);
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--cream);
+      letter-spacing: 0.05em;
+    }
+    .footer-logo span { color: var(--red); }
+    .footer-tagline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.3em;
+      color: rgba(245,237,214,0.3);
+      margin-top: 0.5rem;
+      text-transform: uppercase;
+    }
+    .footer-bottom {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(245,237,214,0.06);
+      font-size: 12px;
+      color: rgba(245,237,214,0.25);
+      font-family: 'Barlow Condensed', sans-serif;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.5rem 6vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(13,11,8,0.9), transparent);
+      backdrop-filter: blur(2px);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.1em;
+      color: var(--cream);
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    @media (max-width: 600px) { .nav-links { display: none; } }
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.25em;
+      color: rgba(245,237,214,0.5);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cream); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Mustang <span>'69</span></div>
+    <ul class="nav-links">
+      <li><a href="#story">Story</a></li>
+      <li><a href="#engines">Engines</a></li>
+      <li><a href="#specs">Specs</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="road-lines"></div>
+
+    <!-- SVG Mustang Fastback Silhouette -->
+    <svg class="car-silhouette" viewBox="0 0 900 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Body -->
+      <path d="M60 240 L80 180 L160 120 L320 80 L500 70 L640 80 L720 110 L780 160 L820 200 L830 240 Z" fill="#1a1714"/>
+      <!-- Fastback roofline -->
+      <path d="M160 120 L200 90 L360 65 L520 62 L650 72 L720 110" stroke="#C8102E" stroke-width="3" fill="none"/>
+      <!-- Body highlight -->
+      <path d="M100 200 L120 160 L200 130 L400 115 L620 118 L740 145 L790 190" stroke="#D4A017" stroke-width="1.5" fill="none" opacity="0.6"/>
+      <!-- Windows -->
+      <path d="M210 118 L250 88 L370 72 L510 70 L620 78 L660 110 Z" fill="#0D0B08" opacity="0.9"/>
+      <path d="M210 118 L250 88 L280 88 L248 118 Z" fill="#111" opacity="0.5"/>
+      <!-- Rear window -->
+      <path d="M620 78 L680 95 L700 118 L660 110 Z" fill="#0D0B08" opacity="0.8"/>
+      <!-- Wheels -->
+      <circle cx="210" cy="248" r="52" fill="#111" stroke="#333" stroke-width="4"/>
+      <circle cx="210" cy="248" r="36" fill="#1a1714" stroke="#D4A017" stroke-width="2"/>
+      <circle cx="210" cy="248" r="12" fill="#D4A017"/>
+      <!-- Wheel spokes -->
+      <line x1="210" y1="212" x2="210" y2="284" stroke="#555" stroke-width="3"/>
+      <line x1="174" y1="248" x2="246" y2="248" stroke="#555" stroke-width="3"/>
+      <line x1="184" y1="222" x2="236" y2="274" stroke="#555" stroke-width="2"/>
+      <line x1="184" y1="274" x2="236" y2="222" stroke="#555" stroke-width="2"/>
+
+      <circle cx="680" cy="248" r="52" fill="#111" stroke="#333" stroke-width="4"/>
+      <circle cx="680" cy="248" r="36" fill="#1a1714" stroke="#D4A017" stroke-width="2"/>
+      <circle cx="680" cy="248" r="12" fill="#D4A017"/>
+      <line x1="680" y1="212" x2="680" y2="284" stroke="#555" stroke-width="3"/>
+      <line x1="644" y1="248" x2="716" y2="248" stroke="#555" stroke-width="3"/>
+      <line x1="654" y1="222" x2="706" y2="274" stroke="#555" stroke-width="2"/>
+      <line x1="654" y1="274" x2="706" y2="222" stroke="#555" stroke-width="2"/>
+
+      <!-- Wheel arches -->
+      <path d="M158 248 Q162 200 210 196 Q258 200 262 248" stroke="#C8102E" stroke-width="3" fill="none"/>
+      <path d="M628 248 Q632 200 680 196 Q728 200 732 248" stroke="#C8102E" stroke-width="3" fill="none"/>
+
+      <!-- Headlight -->
+      <rect x="52" y="195" width="28" height="16" rx="4" fill="#D4A017" opacity="0.7"/>
+      <!-- Taillight -->
+      <rect x="790" y="195" width="22" height="28" rx="2" fill="#C8102E" opacity="0.85"/>
+      <!-- Ground shadow -->
+      <ellipse cx="450" cy="300" rx="380" ry="14" fill="black" opacity="0.5"/>
+      <!-- Mustang emblem hint -->
+      <circle cx="430" cy="158" r="8" fill="#D4A017" opacity="0.4"/>
+    </svg>
+
+    <p class="hero-eyebrow">Ford Motor Company · Dearborn, Michigan</p>
+    <h1 class="hero-title">
+      Mustang
+      <span>Fastback</span>
+    </h1>
+    <p class="hero-sub">1969 · The legend that never died</p>
+
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat"><span class="stat-num">428</span><span class="stat-label">Cubic Inches</span></div>
+    <div class="stat"><span class="stat-num">335</span><span class="stat-label">Horsepower</span></div>
+    <div class="stat"><span class="stat-num">5.5s</span><span class="stat-label">0–60 mph</span></div>
+    <div class="stat"><span class="stat-num">132</span><span class="stat-label">Top Speed mph</span></div>
+    <div class="stat"><span class="stat-num">3,175</span><span class="stat-label">Curb Weight lbs</span></div>
+    <div class="stat"><span class="stat-num">$2,971</span><span class="stat-label">Original MSRP</span></div>
+  </div>
+
+  <!-- STORY -->
+  <section id="story" class="story">
+    <div class="story-text">
+      <p class="section-tag">The Story</p>
+      <h2 class="section-title">Born to Run</h2>
+      <p>The <strong>1969 Ford Mustang Fastback</strong> arrived at a pivotal moment in American muscle car history. Ford's designers, led by Larry Shinoda, gave the Mustang a longer, lower, wider stance — and the iconic SportsRoof fastback roofline that swept dramatically to the rear.</p>
+      <p>It wasn't just beautiful — it was built for the <strong>1969 racing season</strong>. The Boss 302 variant was created specifically to homologate for the Trans-Am championship. The Boss 429 was designed to get NASCAR-legal engines on the street.</p>
+      <div class="quote-block">
+        <p>"It's not just a car. It's a statement about who you are and where you're going."</p>
+      </div>
+      <p>Today, the '69 Fastback is one of the most recognizable and sought-after muscle cars in the world — immortalized by films, races, and decades of passion from collectors worldwide.</p>
+    </div>
+    <div class="numbers-visual">
+      <div class="num-block">
+        <span class="big">299,824</span>
+        <span class="desc">Fastbacks Produced</span>
+      </div>
+      <div class="num-block">
+        <span class="big">5</span>
+        <span class="desc">Engine Options</span>
+      </div>
+      <div class="num-block">
+        <span class="big">1969</span>
+        <span class="desc">Model Year</span>
+      </div>
+      <div class="num-block">
+        <span class="big">16</span>
+        <span class="desc">Color Choices</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENGINES -->
+  <section id="engines" class="engines">
+    <p class="section-tag">Power</p>
+    <h2 class="section-title">Under the Hood</h2>
+    <div class="engine-grid">
+      <div class="engine-card">
+        <div class="engine-name">250 Six</div>
+        <div class="engine-hp">155 HP · Inline-6</div>
+        <p class="engine-desc">The entry-level option. Dependable and economical — a Mustang for everyday driving without sacrificing the style.</p>
+      </div>
+      <div class="engine-card">
+        <div class="engine-name">302 V8</div>
+        <div class="engine-hp">220 HP · Small Block</div>
+        <p class="engine-desc">The sweet spot. Spirited performance with manageable power, this is what most '69 Mustang owners drove off the lot.</p>
+      </div>
+      <div class="engine-card featured">
+        <div class="engine-name">Boss 302</div>
+        <div class="engine-hp">290 HP · High-Rev V8</div>
+        <p class="engine-desc">Built for the Trans-Am series. Revved to 7,000 RPM and screamed like nothing else on the road. A true driver's machine.</p>
+      </div>
+      <div class="engine-card">
+        <div class="engine-name">428 CJ</div>
+        <div class="engine-hp">335 HP · Cobra Jet</div>
+        <p class="engine-desc">The Cobra Jet was Ford's drag-strip weapon. Massive torque from idle, able to devour quarter miles in the low 13-second range.</p>
+      </div>
+      <div class="engine-card">
+        <div class="engine-name">Boss 429</div>
+        <div class="engine-hp">375 HP · NASCAR V8</div>
+        <p class="engine-desc">An engine so large it barely fit the engine bay. Hand-assembled, NASCAR-derived, and utterly brutal. The rarest '69 of all.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY STRIP -->
+  <section class="gallery" style="padding: 6vh 0;">
+    <div style="padding: 0 6vw;">
+      <p class="section-tag">Gallery</p>
+      <h2 class="section-title">Iconic Angles</h2>
+    </div>
+    <div class="gallery-scroll">
+      <!-- Repeated for infinite loop -->
+      <div class="gallery-item"><div class="gallery-icon">🏁</div></div>
+      <div class="gallery-item"><div class="gallery-icon">⚙️</div></div>
+      <div class="gallery-item"><div class="gallery-icon">🔥</div></div>
+      <div class="gallery-item"><div class="gallery-icon">🏎️</div></div>
+      <div class="gallery-item"><div class="gallery-icon">⚡</div></div>
+      <div class="gallery-item"><div class="gallery-icon">🎯</div></div>
+      <div class="gallery-item"><div class="gallery-icon">💨</div></div>
+      <div class="gallery-item"><div class="gallery-icon">🏁</div></div>
+      <!-- Duplicate for seamless scroll -->
+      <div class="gallery-item"><div class="gallery-icon">🏁</div></div>
+      <div class="gallery-item"><div class="gallery-icon">⚙️</div></div>
+      <div class="gallery-item"><div class="gallery-icon">🔥</div></div>
+      <div class="gallery-item"><div class="gallery-icon">🏎️</div></div>
+      <div class="gallery-item"><div class="gallery-icon">⚡</div></div>
+      <div class="gallery-item"><div class="gallery-icon">🎯</div></div>
+      <div class="gallery-item"><div class="gallery-icon">💨</div></div>
+      <div class="gallery-item"><div class="gallery-icon">🏁</div></div>
+    </div>
+  </section>
+
+  <!-- SPECS -->
+  <section id="specs" class="specs">
+    <p class="section-tag">Technical</p>
+    <h2 class="section-title">Full Specifications</h2>
+    <table class="specs-table">
+      <tr><td>Model</td><td>1969 Ford Mustang SportsRoof (Fastback)</td></tr>
+      <tr><td>Body Style</td><td>2-door Fastback Coupe</td></tr>
+      <tr><td>Platform</td><td>Ford Falcon / Mustang unibody</td></tr>
+      <tr><td>Engine (top)</td><td>429 cu in (7.0L) V8 — Boss 429</td></tr>
+      <tr><td>Horsepower</td><td>375 hp @ 5,200 rpm (Boss 429)</td></tr>
+      <tr><td>Torque</td><td>450 lb·ft @ 3,400 rpm</td></tr>
+      <tr><td>Transmission</td><td>4-speed manual or 3-speed automatic</td></tr>
+      <tr><td>Drivetrain</td><td>Rear-wheel drive</td></tr>
+      <tr><td>Front Suspension</td><td>Independent, upper & lower A-arms, coil springs</td></tr>
+      <tr><td>Rear Suspension</td><td>Live axle, leaf springs</td></tr>
+      <tr><td>Brakes</td><td>Front disc / rear drum (optional 4-wheel disc)</td></tr>
+      <tr><td>Length</td><td>187.4 in (476 cm)</td></tr>
+      <tr><td>Width</td><td>71.3 in (181 cm)</td></tr>
+      <tr><td>Height</td><td>51.2 in (130 cm)</td></tr>
+      <tr><td>Wheelbase</td><td>108 in (274 cm)</td></tr>
+      <tr><td>Curb Weight</td><td>3,175 – 3,600 lbs depending on options</td></tr>
+      <tr><td>0–60 mph</td><td>5.5 sec (428 Cobra Jet)</td></tr>
+      <tr><td>Quarter Mile</td><td>13.6 sec @ 106 mph (428 CJ)</td></tr>
+      <tr><td>Top Speed</td><td>~132 mph</td></tr>
+      <tr><td>Fuel Tank</td><td>20 US gallons</td></tr>
+      <tr><td>Production Run</td><td>299,824 SportsRoof units</td></tr>
+      <tr><td>Assembly</td><td>Dearborn, MI · San Jose, CA · Metuchen, NJ</td></tr>
+    </table>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Mustang <span>'69</span></div>
+    <p class="footer-tagline">Ford Motor Company · SportsRoof Fastback</p>
+    <div class="footer-bottom">
+      A fan tribute page — not affiliated with Ford Motor Company. Built with HTML, CSS & love for classics.
+    </div>
+  </footer>
+
+</body>
+</html>
