@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>1969 Ford Mustang Fastback</title>
+  <title>2023 Ford Mustang Mach 1 | Ultimate Performance Machine</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --red: #C8102E;
+      --blue: #0066CC;
       --gold: #D4A017;
       --cream: #F5EDD6;
       --dark: #0D0B08;
@@ -24,18 +25,17 @@
       color: var(--cream);
       font-family: 'Barlow', sans-serif;
       overflow-x: hidden;
-      cursor: crosshair;
     }
 
     /* ── HERO ── */
     .hero {
       position: relative;
       height: 100vh;
-      min-height: 600px;
+      min-height: 700px;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 0 6vw 6vh;
+      padding: 0 6vw 8vh;
       overflow: hidden;
       background: var(--dark);
     }
@@ -44,44 +44,14 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(to bottom, rgba(13,11,8,0.3) 0%, rgba(13,11,8,0.7) 100%),
-        url('mustang-burnout.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+        linear-gradient(to bottom, rgba(13,11,8,0.4) 0%, rgba(13,11,8,0.8) 100%),
+        url('mustang-burnout.png') center/cover;
+      filter: brightness(0.9);
     }
 
-    /* Animated road lines */
-    .road-lines {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 35%;
-      overflow: hidden;
-      opacity: 0.15;
-    }
-    .road-lines::before {
-      content: '';
-      position: absolute;
-      width: 4px;
-      height: 60px;
-      background: var(--cream);
-      left: 50%;
-      bottom: -60px;
-      box-shadow:
-        -300px 0 0 var(--cream), 300px 0 0 var(--cream),
-        -600px 0 0 var(--cream), 600px 0 0 var(--cream);
-      animation: road 1.2s linear infinite;
-    }
-    @keyframes road {
-      0%   { transform: translateY(0) perspective(200px) rotateX(30deg); }
-      100% { transform: translateY(-200px) perspective(200px) rotateX(30deg); }
-    }
-
-    /* SVG Mustang silhouette - hidden since we have real photo */
-    .car-silhouette {
-      display: none;
+    .hero-content {
+      position: relative;
+      z-index: 2;
     }
 
     .hero-eyebrow {
@@ -89,23 +59,20 @@
       font-size: clamp(12px, 1.5vw, 16px);
       font-weight: 600;
       letter-spacing: 0.4em;
-      color: var(--gold);
+      color: var(--blue);
       text-transform: uppercase;
       opacity: 0;
       animation: fadeUp 0.8s ease 0.8s forwards;
-      position: relative;
-      z-index: 2;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.9);
     }
 
     .hero-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(60px, 12vw, 160px);
-      line-height: 0.9;
-      letter-spacing: 0.02em;
+      font-size: clamp(60px, 12vw, 140px);
+      line-height: 0.95;
+      letter-spacing: 0.03em;
       color: var(--cream);
-      position: relative;
-      z-index: 2;
+      margin-top: 0.5rem;
       opacity: 0;
       animation: fadeUp 0.9s ease 1s forwards;
       text-shadow: 0 4px 20px rgba(0,0,0,0.9);
@@ -114,51 +81,47 @@
     .hero-title span {
       display: block;
       color: var(--red);
-      font-size: 0.55em;
-      letter-spacing: 0.15em;
+      font-size: 0.6em;
+      letter-spacing: 0.2em;
+      margin-top: 0.1em;
     }
 
     .hero-sub {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(14px, 2vw, 20px);
+      font-size: clamp(16px, 2.2vw, 24px);
       font-weight: 300;
-      letter-spacing: 0.2em;
-      color: rgba(245,237,214,0.9);
-      margin-top: 1rem;
-      position: relative;
-      z-index: 2;
+      letter-spacing: 0.15em;
+      color: rgba(245,237,214,0.85);
+      margin-top: 1.5rem;
       opacity: 0;
       animation: fadeUp 0.9s ease 1.2s forwards;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.9);
     }
 
-    .scroll-hint {
-      position: absolute;
-      bottom: 3vh;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      opacity: 0;
-      animation: fadeUp 1s ease 1.8s forwards;
-      z-index: 2;
-    }
-    .scroll-hint span {
+    .cta-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 1rem 2.5rem;
+      background: var(--red);
+      color: var(--cream);
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.3em;
-      color: rgba(245,237,214,0.7);
-      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-decoration: none;
+      text-transform: uppercase;
+      border: 2px solid var(--red);
+      transition: all 0.3s;
+      opacity: 0;
+      animation: fadeUp 1s ease 1.4s forwards;
+      box-shadow: 0 4px 15px rgba(200,16,46,0.4);
     }
-    .scroll-line {
-      width: 1px;
-      height: 50px;
-      background: linear-gradient(to bottom, var(--gold), transparent);
-      animation: pulse 1.5s ease-in-out infinite;
+
+    .cta-button:hover {
+      background: transparent;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(200,16,46,0.6);
     }
-    @keyframes pulse { 50% { opacity: 0.3; } }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
@@ -168,9 +131,9 @@
     /* ── STATS BAR ── */
     .stats-bar {
       background: var(--red);
-      padding: 1.2rem 6vw;
+      padding: 1.5rem 6vw;
       display: flex;
-      gap: 3rem;
+      gap: 4rem;
       overflow-x: auto;
       scrollbar-width: none;
     }
@@ -178,33 +141,33 @@
     .stat {
       display: flex;
       align-items: baseline;
-      gap: 0.4rem;
+      gap: 0.5rem;
       white-space: nowrap;
       flex-shrink: 0;
     }
     .stat-num {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.2rem;
+      font-size: 2.5rem;
       color: var(--cream);
     }
     .stat-label {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       letter-spacing: 0.15em;
-      color: rgba(245,237,214,0.7);
+      color: rgba(245,237,214,0.8);
       text-transform: uppercase;
     }
 
     /* ── SECTIONS ── */
     section {
-      padding: 8vh 6vw;
+      padding: 10vh 6vw;
     }
 
     .section-tag {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 11px;
+      font-size: 12px;
       letter-spacing: 0.5em;
-      color: var(--gold);
+      color: var(--blue);
       text-transform: uppercase;
       margin-bottom: 1rem;
       display: flex;
@@ -214,253 +177,320 @@
     .section-tag::after {
       content: '';
       flex: 1;
-      max-width: 60px;
+      max-width: 80px;
       height: 1px;
-      background: var(--gold);
+      background: var(--blue);
     }
 
     .section-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(36px, 6vw, 72px);
+      font-size: clamp(40px, 7vw, 80px);
       line-height: 1;
       color: var(--cream);
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
 
-    /* ── STORY ── */
-    .story {
+    /* ── OVERVIEW ── */
+    .overview {
       background: var(--charcoal);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6vw;
-      align-items: center;
-    }
-    @media (max-width: 768px) {
-      .story { grid-template-columns: 1fr; }
     }
 
-    .story-text p {
-      font-size: clamp(15px, 1.5vw, 17px);
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 6vw;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .overview-grid { grid-template-columns: 1fr; }
+    }
+
+    .overview-text p {
+      font-size: clamp(15px, 1.6vw, 18px);
       line-height: 1.8;
       color: rgba(245,237,214,0.7);
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.3rem;
     }
-    .story-text p strong {
+
+    .overview-text strong {
       color: var(--cream);
       font-weight: 600;
     }
 
-    .quote-block {
-      border-left: 3px solid var(--red);
+    .highlight-box {
+      background: rgba(0,102,204,0.1);
+      border-left: 4px solid var(--blue);
       padding: 1.5rem 2rem;
       margin: 2rem 0;
-      background: rgba(200,16,46,0.05);
     }
-    .quote-block p {
+
+    .highlight-box p {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(18px, 2.5vw, 26px);
-      font-weight: 300;
-      font-style: italic;
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 400;
       color: var(--cream) !important;
-      letter-spacing: 0.02em;
-      line-height: 1.5 !important;
+      line-height: 1.6 !important;
       margin: 0 !important;
     }
 
-    /* Numbers visual */
-    .numbers-visual {
+    .feature-blocks {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2px;
+      gap: 3px;
     }
-    .num-block {
+
+    .feature-block {
       background: var(--smoke);
-      padding: 2.5rem 2rem;
+      padding: 2rem 1.5rem;
       text-align: center;
       transition: background 0.3s;
     }
-    .num-block:hover { background: var(--red); }
-    .num-block:first-child { background: var(--red); }
-    .num-block .big {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(40px, 5vw, 64px);
-      color: var(--cream);
-      display: block;
-    }
-    .num-block .desc {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 13px;
-      letter-spacing: 0.2em;
-      color: rgba(245,237,214,0.6);
-      text-transform: uppercase;
+
+    .feature-block:hover {
+      background: var(--blue);
     }
 
-    /* ── ENGINES ── */
-    .engines {
-      background: var(--dark);
-    }
-    .engine-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2px;
-      margin-top: 3rem;
-    }
-    .engine-card {
-      background: var(--charcoal);
-      padding: 2.5rem 2rem;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s;
-      border-bottom: 3px solid transparent;
-    }
-    .engine-card:hover {
-      transform: translateY(-4px);
-      border-bottom-color: var(--red);
-    }
-    .engine-card.featured { border-bottom-color: var(--gold); }
-    .engine-card.featured::before {
-      content: 'MOST WANTED';
-      position: absolute;
-      top: 1rem;
-      right: -1.8rem;
-      background: var(--gold);
-      color: var(--dark);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      padding: 4px 3rem;
-      transform: rotate(35deg);
-      font-weight: 700;
-    }
-    .engine-name {
-      font-family: 'Bebas Neue', sans-serif;
+    .feature-block .icon {
       font-size: 2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .feature-block .label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
       color: var(--cream);
       margin-bottom: 0.3rem;
     }
-    .engine-hp {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1rem;
-      color: var(--gold);
-      letter-spacing: 0.15em;
-      margin-bottom: 1.2rem;
-    }
-    .engine-desc {
-      font-size: 14px;
-      line-height: 1.7;
-      color: rgba(245,237,214,0.5);
+
+    .feature-block .desc {
+      font-size: 13px;
+      color: rgba(245,237,214,0.6);
+      line-height: 1.5;
     }
 
-    /* ── GALLERY ── */
-    .gallery {
+    /* ── ENGINE SPECS ── */
+    .engine-specs {
+      background: var(--dark);
+    }
+
+    .engine-detail {
       background: var(--charcoal);
-      overflow: hidden;
-    }
-    .gallery-scroll {
-      display: flex;
-      gap: 2px;
-      margin-top: 3rem;
-      animation: galleryMove 20s linear infinite;
-      width: max-content;
-    }
-    .gallery-scroll:hover { animation-play-state: paused; }
-    @keyframes galleryMove {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    .gallery-item {
-      width: 300px;
-      height: 200px;
-      background: var(--smoke);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.2rem;
-      letter-spacing: 0.1em;
-      color: rgba(245,237,214,0.2);
-      flex-shrink: 0;
-      position: relative;
-      overflow: hidden;
-    }
-    .gallery-item::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--gi-color, var(--smoke));
-      opacity: 0.6;
-    }
-    .gallery-item:nth-child(odd)  { --gi-color: #1f1008; }
-    .gallery-item:nth-child(even) { --gi-color: #0f0f0f; }
-    .gallery-icon {
-      font-size: 3rem;
-      opacity: 0.15;
-      position: relative;
-      z-index: 1;
+      padding: 3rem;
+      margin-bottom: 3rem;
     }
 
-    /* ── SPECS ── */
-    .specs { background: var(--dark); }
-    .specs-table {
-      margin-top: 3rem;
+    .engine-detail h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(28px, 4vw, 40px);
+      color: var(--blue);
+      margin-bottom: 1rem;
+    }
+
+    .engine-detail p {
+      font-size: clamp(15px, 1.5vw, 17px);
+      line-height: 1.8;
+      color: rgba(245,237,214,0.7);
+      margin-bottom: 1rem;
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2px;
+      margin-top: 2rem;
+    }
+
+    .spec-item {
+      background: var(--smoke);
+      padding: 1.8rem 1.5rem;
+    }
+
+    .spec-item .spec-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--cream);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .spec-item .spec-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      color: rgba(245,237,214,0.5);
+      text-transform: uppercase;
+    }
+
+    /* ── COMPARISON TABLE ── */
+    .comparison {
+      background: var(--charcoal);
+    }
+
+    .comparison-intro {
+      font-size: clamp(15px, 1.6vw, 18px);
+      line-height: 1.7;
+      color: rgba(245,237,214,0.7);
+      margin-bottom: 3rem;
+      max-width: 900px;
+    }
+
+    .comparison-table {
       width: 100%;
       border-collapse: collapse;
+      margin-top: 2rem;
+      background: var(--smoke);
     }
-    .specs-table tr {
-      border-bottom: 1px solid rgba(245,237,214,0.06);
-      transition: background 0.2s;
+
+    .comparison-table thead {
+      background: var(--dark);
     }
-    .specs-table tr:hover { background: rgba(245,237,214,0.03); }
-    .specs-table td {
-      padding: 1.1rem 1rem;
-      font-size: 15px;
-    }
-    .specs-table td:first-child {
+
+    .comparison-table th {
+      padding: 1.2rem 1rem;
       font-family: 'Barlow Condensed', sans-serif;
-      letter-spacing: 0.1em;
-      color: rgba(245,237,214,0.4);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      font-size: 12px;
-      width: 45%;
+      color: var(--blue);
+      text-align: left;
+      border-bottom: 2px solid var(--blue);
     }
-    .specs-table td:last-child {
+
+    .comparison-table td {
+      padding: 1.2rem 1rem;
+      font-size: 15px;
+      color: rgba(245,237,214,0.8);
+      border-bottom: 1px solid rgba(245,237,214,0.1);
+    }
+
+    .comparison-table tr:hover {
+      background: rgba(245,237,214,0.03);
+    }
+
+    .comparison-table .highlight {
+      background: rgba(0,102,204,0.15);
+      font-weight: 600;
       color: var(--cream);
-      font-weight: 400;
     }
-    .specs-table tr:first-child td:last-child {
-      color: var(--gold);
+
+    .comparison-table tbody tr:first-child {
+      background: rgba(200,16,46,0.1);
+    }
+
+    .comparison-table tbody tr:first-child td {
+      font-weight: 600;
+      color: var(--cream);
+    }
+
+    /* ── INTERIOR/EXTERIOR ── */
+    .details {
+      background: var(--dark);
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+    }
+
+    @media (max-width: 768px) {
+      .details-grid { grid-template-columns: 1fr; }
+    }
+
+    .detail-section {
+      background: var(--charcoal);
+      padding: 3rem 2.5rem;
+    }
+
+    .detail-section h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(28px, 4vw, 36px);
+      color: var(--blue);
+      margin-bottom: 1.5rem;
+    }
+
+    .detail-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .detail-section li {
+      padding: 0.9rem 0 0.9rem 1.5rem;
+      position: relative;
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(245,237,214,0.75);
+      border-bottom: 1px solid rgba(245,237,214,0.05);
+    }
+
+    .detail-section li:before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+      font-weight: bold;
+    }
+
+    .detail-section li:last-child {
+      border-bottom: none;
+    }
+
+    /* ── FOOTER / CTA ── */
+    .find-yours {
+      background: var(--red);
+      padding: 6rem 6vw;
+      text-align: center;
+    }
+
+    .find-yours h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 8vw, 80px);
+      color: var(--cream);
+      margin-bottom: 1rem;
+    }
+
+    .find-yours p {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.1rem;
+      font-size: clamp(16px, 2vw, 22px);
+      color: rgba(245,237,214,0.9);
+      margin-bottom: 2.5rem;
       letter-spacing: 0.05em;
     }
 
-    /* ── FOOTER ── */
-    footer {
-      background: var(--charcoal);
-      padding: 4rem 6vw 3rem;
-      border-top: 1px solid rgba(245,237,214,0.06);
-    }
-    .footer-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 3rem;
-      color: var(--cream);
-      letter-spacing: 0.05em;
-    }
-    .footer-logo span { color: var(--red); }
-    .footer-tagline {
+    .find-button {
+      display: inline-block;
+      padding: 1.2rem 3rem;
+      background: var(--cream);
+      color: var(--dark);
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 13px;
-      letter-spacing: 0.3em;
-      color: rgba(245,237,214,0.3);
-      margin-top: 0.5rem;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-decoration: none;
       text-transform: uppercase;
+      border: 2px solid var(--cream);
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
-    .footer-bottom {
-      margin-top: 3rem;
-      padding-top: 1.5rem;
+
+    .find-button:hover {
+      background: transparent;
+      color: var(--cream);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    }
+
+    footer {
+      background: var(--dark);
+      padding: 3rem 6vw 2rem;
       border-top: 1px solid rgba(245,237,214,0.06);
+      text-align: center;
+    }
+
+    footer p {
       font-size: 12px;
-      color: rgba(245,237,214,0.25);
+      color: rgba(245,237,214,0.3);
       font-family: 'Barlow Condensed', sans-serif;
       letter-spacing: 0.1em;
     }
@@ -474,23 +504,28 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: linear-gradient(to bottom, rgba(13,11,8,0.9), transparent);
-      backdrop-filter: blur(2px);
+      background: linear-gradient(to bottom, rgba(13,11,8,0.95), transparent);
+      backdrop-filter: blur(3px);
     }
+
     .nav-logo {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5rem;
-      letter-spacing: 0.1em;
+      font-size: 1.6rem;
+      letter-spacing: 0.08em;
       color: var(--cream);
       text-shadow: 0 2px 8px rgba(0,0,0,0.8);
     }
-    .nav-logo span { color: var(--red); }
+
+    .nav-logo span { color: var(--blue); }
+
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 2.5rem;
       list-style: none;
     }
-    @media (max-width: 600px) { .nav-links { display: none; } }
+
+    @media (max-width: 700px) { .nav-links { display: none; } }
+
     .nav-links a {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 13px;
@@ -501,6 +536,7 @@
       transition: color 0.2s;
       text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     }
+
     .nav-links a:hover { color: var(--cream); }
   </style>
 </head>
@@ -508,217 +544,262 @@
 
   <!-- NAV -->
   <nav>
-    <div class="nav-logo">Mustang <span>'69</span></div>
+    <div class="nav-logo">Mustang <span>Mach 1</span></div>
     <ul class="nav-links">
-      <li><a href="#story">Story</a></li>
-      <li><a href="#engines">Engines</a></li>
-      <li><a href="#specs">Specs</a></li>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#engine">Engine</a></li>
+      <li><a href="#comparison">Comparison</a></li>
+      <li><a href="#details">Details</a></li>
     </ul>
   </nav>
 
   <!-- HERO -->
   <section class="hero">
     <div class="hero-bg"></div>
-    <div class="road-lines"></div>
-
-    <!-- SVG Mustang Fastback Silhouette (hidden - using real photo instead) -->
-    <svg class="car-silhouette" viewBox="0 0 900 340" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Body -->
-      <path d="M60 240 L80 180 L160 120 L320 80 L500 70 L640 80 L720 110 L780 160 L820 200 L830 240 Z" fill="#1a1714"/>
-      <!-- Fastback roofline -->
-      <path d="M160 120 L200 90 L360 65 L520 62 L650 72 L720 110" stroke="#C8102E" stroke-width="3" fill="none"/>
-      <!-- Body highlight -->
-      <path d="M100 200 L120 160 L200 130 L400 115 L620 118 L740 145 L790 190" stroke="#D4A017" stroke-width="1.5" fill="none" opacity="0.6"/>
-      <!-- Windows -->
-      <path d="M210 118 L250 88 L370 72 L510 70 L620 78 L660 110 Z" fill="#0D0B08" opacity="0.9"/>
-      <path d="M210 118 L250 88 L280 88 L248 118 Z" fill="#111" opacity="0.5"/>
-      <!-- Rear window -->
-      <path d="M620 78 L680 95 L700 118 L660 110 Z" fill="#0D0B08" opacity="0.8"/>
-      <!-- Wheels -->
-      <circle cx="210" cy="248" r="52" fill="#111" stroke="#333" stroke-width="4"/>
-      <circle cx="210" cy="248" r="36" fill="#1a1714" stroke="#D4A017" stroke-width="2"/>
-      <circle cx="210" cy="248" r="12" fill="#D4A017"/>
-      <!-- Wheel spokes -->
-      <line x1="210" y1="212" x2="210" y2="284" stroke="#555" stroke-width="3"/>
-      <line x1="174" y1="248" x2="246" y2="248" stroke="#555" stroke-width="3"/>
-      <line x1="184" y1="222" x2="236" y2="274" stroke="#555" stroke-width="2"/>
-      <line x1="184" y1="274" x2="236" y2="222" stroke="#555" stroke-width="2"/>
-
-      <circle cx="680" cy="248" r="52" fill="#111" stroke="#333" stroke-width="4"/>
-      <circle cx="680" cy="248" r="36" fill="#1a1714" stroke="#D4A017" stroke-width="2"/>
-      <circle cx="680" cy="248" r="12" fill="#D4A017"/>
-      <line x1="680" y1="212" x2="680" y2="284" stroke="#555" stroke-width="3"/>
-      <line x1="644" y1="248" x2="716" y2="248" stroke="#555" stroke-width="3"/>
-      <line x1="654" y1="222" x2="706" y2="274" stroke="#555" stroke-width="2"/>
-      <line x1="654" y1="274" x2="706" y2="222" stroke="#555" stroke-width="2"/>
-
-      <!-- Wheel arches -->
-      <path d="M158 248 Q162 200 210 196 Q258 200 262 248" stroke="#C8102E" stroke-width="3" fill="none"/>
-      <path d="M628 248 Q632 200 680 196 Q728 200 732 248" stroke="#C8102E" stroke-width="3" fill="none"/>
-
-      <!-- Headlight -->
-      <rect x="52" y="195" width="28" height="16" rx="4" fill="#D4A017" opacity="0.7"/>
-      <!-- Taillight -->
-      <rect x="790" y="195" width="22" height="28" rx="2" fill="#C8102E" opacity="0.85"/>
-      <!-- Ground shadow -->
-      <ellipse cx="450" cy="300" rx="380" ry="14" fill="black" opacity="0.5"/>
-      <!-- Mustang emblem hint -->
-      <circle cx="430" cy="158" r="8" fill="#D4A017" opacity="0.4"/>
-    </svg>
-
-    <p class="hero-eyebrow">Ford Motor Company · Dearborn, Michigan</p>
-    <h1 class="hero-title">
-      Mustang
-      <span>Fastback</span>
-    </h1>
-    <p class="hero-sub">1969 · The legend that never died</p>
-
-    <div class="scroll-hint">
-      <span>Scroll</span>
-      <div class="scroll-line"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">2023 Model Year</p>
+      <h1 class="hero-title">
+        Mustang
+        <span>Mach 1</span>
+      </h1>
+      <p class="hero-sub">Track-Ready • Street Legal • Pure Performance</p>
+      <a href="#find-yours" class="cta-button">Find Yours in Houston</a>
     </div>
   </section>
 
   <!-- STATS BAR -->
   <div class="stats-bar">
-    <div class="stat"><span class="stat-num">428</span><span class="stat-label">Cubic Inches</span></div>
-    <div class="stat"><span class="stat-num">335</span><span class="stat-label">Horsepower</span></div>
-    <div class="stat"><span class="stat-num">5.5s</span><span class="stat-label">0–60 mph</span></div>
-    <div class="stat"><span class="stat-num">132</span><span class="stat-label">Top Speed mph</span></div>
-    <div class="stat"><span class="stat-num">3,175</span><span class="stat-label">Curb Weight lbs</span></div>
-    <div class="stat"><span class="stat-num">$2,971</span><span class="stat-label">Original MSRP</span></div>
+    <div class="stat"><span class="stat-num">480</span><span class="stat-label">Horsepower</span></div>
+    <div class="stat"><span class="stat-num">420</span><span class="stat-label">lb-ft Torque</span></div>
+    <div class="stat"><span class="stat-num">4.2s</span><span class="stat-label">0–60 mph</span></div>
+    <div class="stat"><span class="stat-num">168</span><span class="stat-label">Top Speed mph</span></div>
+    <div class="stat"><span class="stat-num">5.0L</span><span class="stat-label">V8 Engine</span></div>
+    <div class="stat"><span class="stat-num">$56,570</span><span class="stat-label">Base MSRP</span></div>
   </div>
 
-  <!-- STORY -->
-  <section id="story" class="story">
-    <div class="story-text">
-      <p class="section-tag">The Story</p>
-      <h2 class="section-title">Born to Run</h2>
-      <p>The <strong>1969 Ford Mustang Fastback</strong> arrived at a pivotal moment in American muscle car history. Ford's designers, led by Larry Shinoda, gave the Mustang a longer, lower, wider stance — and the iconic SportsRoof fastback roofline that swept dramatically to the rear.</p>
-      <p>It wasn't just beautiful — it was built for the <strong>1969 racing season</strong>. The Boss 302 variant was created specifically to homologate for the Trans-Am championship. The Boss 429 was designed to get NASCAR-legal engines on the street.</p>
-      <div class="quote-block">
-        <p>"It's not just a car. It's a statement about who you are and where you're going."</p>
+  <!-- OVERVIEW -->
+  <section id="overview" class="overview">
+    <div class="overview-grid">
+      <div class="overview-text">
+        <p class="section-tag">The Machine</p>
+        <h2 class="section-title">Built for the Track, Ready for the Street</h2>
+        <p>The <strong>2023 Ford Mustang Mach 1</strong> represents the pinnacle of naturally aspirated V8 performance in Ford's lineup. Drawing inspiration from the legendary '69 Mach 1, this modern interpretation combines the best components from the Bullitt and GT350 to create a track weapon that's still daily-drivable.</p>
+        <p>At its heart lies a <strong>5.0-liter Coyote V8</strong> engine sourced from the Bullitt, rated at 480 horsepower at 7,000 RPM and 420 lb-ft of torque at 4,600 RPM. The high-revving nature of this engine makes it one of the most thrilling powerplants available in any muscle car today.</p>
+        <div class="highlight-box">
+          <p>"The Mach 1 takes the best bits of each Mustang variant and combines them into one incredible whole. It may very well be the ultimate Mustang."</p>
+        </div>
+        <p>The Tremec 3160 six-speed manual transmission—borrowed from the GT350—features rev-matching and is paired with an upgraded oil cooler system, twin-disc clutch, and short-throw shifter. For those preferring automatic, a 10-speed SelectShift is available with paddle shifters and unique calibration.</p>
       </div>
-      <p>Today, the '69 Fastback is one of the most recognizable and sought-after muscle cars in the world — immortalized by films, races, and decades of passion from collectors worldwide.</p>
-    </div>
-    <div class="numbers-visual">
-      <div class="num-block">
-        <span class="big">299,824</span>
-        <span class="desc">Fastbacks Produced</span>
-      </div>
-      <div class="num-block">
-        <span class="big">5</span>
-        <span class="desc">Engine Options</span>
-      </div>
-      <div class="num-block">
-        <span class="big">1969</span>
-        <span class="desc">Model Year</span>
-      </div>
-      <div class="num-block">
-        <span class="big">16</span>
-        <span class="desc">Color Choices</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ENGINES -->
-  <section id="engines" class="engines">
-    <p class="section-tag">Power</p>
-    <h2 class="section-title">Under the Hood</h2>
-    <div class="engine-grid">
-      <div class="engine-card">
-        <div class="engine-name">250 Six</div>
-        <div class="engine-hp">155 HP · Inline-6</div>
-        <p class="engine-desc">The entry-level option. Dependable and economical — a Mustang for everyday driving without sacrificing the style.</p>
-      </div>
-      <div class="engine-card">
-        <div class="engine-name">302 V8</div>
-        <div class="engine-hp">220 HP · Small Block</div>
-        <p class="engine-desc">The sweet spot. Spirited performance with manageable power, this is what most '69 Mustang owners drove off the lot.</p>
-      </div>
-      <div class="engine-card featured">
-        <div class="engine-name">Boss 302</div>
-        <div class="engine-hp">290 HP · High-Rev V8</div>
-        <p class="engine-desc">Built for the Trans-Am series. Revved to 7,000 RPM and screamed like nothing else on the road. A true driver's machine.</p>
-      </div>
-      <div class="engine-card">
-        <div class="engine-name">428 CJ</div>
-        <div class="engine-hp">335 HP · Cobra Jet</div>
-        <p class="engine-desc">The Cobra Jet was Ford's drag-strip weapon. Massive torque from idle, able to devour quarter miles in the low 13-second range.</p>
-      </div>
-      <div class="engine-card">
-        <div class="engine-name">Boss 429</div>
-        <div class="engine-hp">375 HP · NASCAR V8</div>
-        <p class="engine-desc">An engine so large it barely fit the engine bay. Hand-assembled, NASCAR-derived, and utterly brutal. The rarest '69 of all.</p>
+      <div class="feature-blocks">
+        <div class="feature-block">
+          <div class="icon">⚙️</div>
+          <div class="label">Tremec Manual</div>
+          <div class="desc">GT350-sourced 6-speed with rev-matching</div>
+        </div>
+        <div class="feature-block">
+          <div class="icon">🎯</div>
+          <div class="label">Handling Package</div>
+          <div class="desc">Functional aero & track-focused upgrades</div>
+        </div>
+        <div class="feature-block">
+          <div class="icon">💺</div>
+          <div class="label">RECARO Seats</div>
+          <div class="desc">Race-inspired cloth sport seats</div>
+        </div>
+        <div class="feature-block">
+          <div class="icon">🏁</div>
+          <div class="label">Track Ready</div>
+          <div class="desc">Line-lock, launch control, 5 drive modes</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- GALLERY STRIP -->
-  <section class="gallery" style="padding: 6vh 0;">
-    <div style="padding: 0 6vw;">
-      <p class="section-tag">Gallery</p>
-      <h2 class="section-title">Iconic Angles</h2>
+  <!-- ENGINE SPECS -->
+  <section id="engine" class="engine-specs">
+    <p class="section-tag">Powerplant</p>
+    <h2 class="section-title">5.0L Coyote V8</h2>
+    
+    <div class="engine-detail">
+      <h3>Shelby-Inspired Performance</h3>
+      <p>The Mach 1's 5.0-liter V8 features Shelby Mustang-inspired components that elevate it above the standard GT. Ford engineers incorporated the intake manifold and oil filter adapter from the GT350, along with an Open Air Induction System that routes cold air directly from the grille.</p>
+      <p>Redline sits at a screaming <strong>7,250 RPM</strong>, encouraging drivers to keep the revs high and experience the full fury of this naturally aspirated masterpiece. The engine note is visceral and unmistakably American V8.</p>
+      
+      <div class="specs-grid">
+        <div class="spec-item">
+          <span class="spec-value">480 HP</span>
+          <span class="spec-label">@ 7,000 RPM</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-value">420 lb-ft</span>
+          <span class="spec-label">Torque @ 4,600 RPM</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-value">5.0L</span>
+          <span class="spec-label">Displacement (307 cu in)</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-value">7,250</span>
+          <span class="spec-label">Redline RPM</span>
+        </div>
+      </div>
     </div>
-    <div class="gallery-scroll">
-      <!-- Repeated for infinite loop -->
-      <div class="gallery-item"><div class="gallery-icon">🏁</div></div>
-      <div class="gallery-item"><div class="gallery-icon">⚙️</div></div>
-      <div class="gallery-item"><div class="gallery-icon">🔥</div></div>
-      <div class="gallery-item"><div class="gallery-icon">🏎️</div></div>
-      <div class="gallery-item"><div class="gallery-icon">⚡</div></div>
-      <div class="gallery-item"><div class="gallery-icon">🎯</div></div>
-      <div class="gallery-item"><div class="gallery-icon">💨</div></div>
-      <div class="gallery-item"><div class="gallery-icon">🏁</div></div>
-      <!-- Duplicate for seamless scroll -->
-      <div class="gallery-item"><div class="gallery-icon">🏁</div></div>
-      <div class="gallery-item"><div class="gallery-icon">⚙️</div></div>
-      <div class="gallery-item"><div class="gallery-icon">🔥</div></div>
-      <div class="gallery-item"><div class="gallery-icon">🏎️</div></div>
-      <div class="gallery-item"><div class="gallery-icon">⚡</div></div>
-      <div class="gallery-item"><div class="gallery-icon">🎯</div></div>
-      <div class="gallery-item"><div class="gallery-icon">💨</div></div>
-      <div class="gallery-item"><div class="gallery-icon">🏁</div></div>
+
+    <div class="engine-detail">
+      <h3>Performance Numbers</h3>
+      <p>With the optional Handling Package, the Mach 1 achieves <strong>0-60 mph in just 4.2 seconds</strong> and reaches a top speed of 168 mph. Quarter-mile runs consistently land in the low-to-mid 12-second range, making this one of the quickest naturally aspirated Mustangs ever built.</p>
+      <p>Despite its track-focused nature, the Mach 1 achieves a respectable <strong>18 MPG combined</strong> (15 city / 24 highway), balancing performance with real-world usability.</p>
     </div>
   </section>
 
-  <!-- SPECS -->
-  <section id="specs" class="specs">
-    <p class="section-tag">Technical</p>
-    <h2 class="section-title">Full Specifications</h2>
-    <table class="specs-table">
-      <tr><td>Model</td><td>1969 Ford Mustang SportsRoof (Fastback)</td></tr>
-      <tr><td>Body Style</td><td>2-door Fastback Coupe</td></tr>
-      <tr><td>Platform</td><td>Ford Falcon / Mustang unibody</td></tr>
-      <tr><td>Engine (top)</td><td>429 cu in (7.0L) V8 — Boss 429</td></tr>
-      <tr><td>Horsepower</td><td>375 hp @ 5,200 rpm (Boss 429)</td></tr>
-      <tr><td>Torque</td><td>450 lb·ft @ 3,400 rpm</td></tr>
-      <tr><td>Transmission</td><td>4-speed manual or 3-speed automatic</td></tr>
-      <tr><td>Drivetrain</td><td>Rear-wheel drive</td></tr>
-      <tr><td>Front Suspension</td><td>Independent, upper & lower A-arms, coil springs</td></tr>
-      <tr><td>Rear Suspension</td><td>Live axle, leaf springs</td></tr>
-      <tr><td>Brakes</td><td>Front disc / rear drum (optional 4-wheel disc)</td></tr>
-      <tr><td>Length</td><td>187.4 in (476 cm)</td></tr>
-      <tr><td>Width</td><td>71.3 in (181 cm)</td></tr>
-      <tr><td>Height</td><td>51.2 in (130 cm)</td></tr>
-      <tr><td>Wheelbase</td><td>108 in (274 cm)</td></tr>
-      <tr><td>Curb Weight</td><td>3,175 – 3,600 lbs depending on options</td></tr>
-      <tr><td>0–60 mph</td><td>5.5 sec (428 Cobra Jet)</td></tr>
-      <tr><td>Quarter Mile</td><td>13.6 sec @ 106 mph (428 CJ)</td></tr>
-      <tr><td>Top Speed</td><td>~132 mph</td></tr>
-      <tr><td>Fuel Tank</td><td>20 US gallons</td></tr>
-      <tr><td>Production Run</td><td>299,824 SportsRoof units</td></tr>
-      <tr><td>Assembly</td><td>Dearborn, MI · San Jose, CA · Metuchen, NJ</td></tr>
+  <!-- COMPARISON -->
+  <section id="comparison" class="comparison">
+    <p class="section-tag">Head to Head</p>
+    <h2 class="section-title">2023 V8 Muscle Car Showdown</h2>
+    <p class="comparison-intro">The 2023 model year marked the final chapter for traditional V8 muscle cars. Here's how the Mach 1 stacks up against its V8 competitors from Chevrolet and Dodge. All three manufacturers offered compelling V8 options, but each took a different approach to performance.</p>
+
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Engine</th>
+          <th>Horsepower</th>
+          <th>Torque</th>
+          <th>0-60 mph</th>
+          <th>Weight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="highlight">Ford Mustang Mach 1</td>
+          <td class="highlight">5.0L V8 NA</td>
+          <td class="highlight">480 hp</td>
+          <td class="highlight">420 lb-ft</td>
+          <td class="highlight">4.2s</td>
+          <td class="highlight">3,814 lbs</td>
+        </tr>
+        <tr>
+          <td>Chevrolet Camaro SS</td>
+          <td>6.2L LT1 V8 NA</td>
+          <td>455 hp</td>
+          <td>455 lb-ft</td>
+          <td>4.0s</td>
+          <td>3,685 lbs</td>
+        </tr>
+        <tr>
+          <td>Chevrolet Camaro ZL1</td>
+          <td>6.2L LT4 V8 SC</td>
+          <td>650 hp</td>
+          <td>650 lb-ft</td>
+          <td>3.5s</td>
+          <td>3,883 lbs</td>
+        </tr>
+        <tr>
+          <td>Dodge Challenger R/T</td>
+          <td>5.7L HEMI V8</td>
+          <td>372 hp</td>
+          <td>400 lb-ft</td>
+          <td>5.1s</td>
+          <td>4,085 lbs</td>
+        </tr>
+        <tr>
+          <td>Dodge Challenger Scat Pack</td>
+          <td>6.4L HEMI V8</td>
+          <td>485 hp</td>
+          <td>475 lb-ft</td>
+          <td>4.3s</td>
+          <td>4,239 lbs</td>
+        </tr>
+        <tr>
+          <td>Dodge Challenger Hellcat</td>
+          <td>6.2L HEMI V8 SC</td>
+          <td>717 hp</td>
+          <td>656 lb-ft</td>
+          <td>3.6s</td>
+          <td>4,448 lbs</td>
+        </tr>
+      </tbody>
     </table>
+
+    <div class="highlight-box" style="margin-top: 3rem;">
+      <p><strong>The Verdict:</strong> The Mach 1 offers the best balance of naturally aspirated performance, handling dynamics, and daily usability. While supercharged variants like the ZL1 and Hellcat produce more power, the Mach 1's lighter weight and superior handling make it the more rewarding driver's car on a road course.</p>
+    </div>
+  </section>
+
+  <!-- DETAILS -->
+  <section id="details" class="details">
+    <p class="section-tag">The Details</p>
+    <h2 class="section-title">Interior, Exterior & Suspension</h2>
+
+    <div class="details-grid">
+      <div class="detail-section">
+        <h3>Interior Features</h3>
+        <ul>
+          <li><strong>RECARO Cloth Sport Seats:</strong> Optional race-inspired seats with enhanced side bolstering and integrated headrests for superior support during aggressive driving</li>
+          <li><strong>Dark Spindrift Aluminum Trim:</strong> Unique instrument panel appliqué exclusive to Mach 1 Premium models</li>
+          <li><strong>White Cue-Ball Shift Knob:</strong> Retro-inspired shifter paying homage to classic Mustangs (manual transmission only)</li>
+          <li><strong>12-inch Digital Cluster:</strong> Fully configurable LCD display with track apps, G-force meter, and performance timers</li>
+          <li><strong>SYNC 3 Infotainment:</strong> 8-inch touchscreen with Apple CarPlay, Android Auto, and voice-activated navigation</li>
+          <li><strong>Premium Materials:</strong> Leather-trimmed seats standard on Premium trim with color-accented stitching</li>
+          <li><strong>Dual-Zone Climate Control:</strong> Electronic automatic temperature control for driver and passenger comfort</li>
+          <li><strong>B&O Sound System:</strong> Optional 12-speaker Bang & Olufsen audio with subwoofer (requires Mach 1 Elite Package)</li>
+        </ul>
+      </div>
+
+      <div class="detail-section">
+        <h3>Exterior Design</h3>
+        <ul>
+          <li><strong>Unique Front Fascia:</strong> Functional aero with larger grille openings for improved cooling and downforce</li>
+          <li><strong>Hood with Heat Extractors:</strong> Functional vents reduce engine bay temperatures and add aggressive styling</li>
+          <li><strong>19-inch Wheels:</strong> Modern interpretation of classic Magnum 500 wheels (19x9.5" front, 19x10" rear)</li>
+          <li><strong>Mach 1 Badging:</strong> Unique emblems on fenders, decklid, and grille distinguish this model from standard GTs</li>
+          <li><strong>Fighter Jet Gray:</strong> Exclusive color option available with Appearance Package</li>
+          <li><strong>Rear Spoiler:</strong> Low-profile lip spoiler or optional larger GT500-style spoiler for increased downforce</li>
+          <li><strong>Quad Exhaust Tips:</strong> Active valve performance exhaust with four outlets creates an iconic sound</li>
+          <li><strong>Splitter & Side Sills:</strong> Functional aerodynamic elements reduce lift and improve high-speed stability</li>
+        </ul>
+      </div>
+
+      <div class="detail-section">
+        <h3>Suspension & Handling</h3>
+        <ul>
+          <li><strong>MagneRide Damping System:</strong> Continuously adjusts suspension in real-time for optimal performance (Handling Package)</li>
+          <li><strong>Unique Front Subframe:</strong> Modified for increased negative camber and improved turn-in response</li>
+          <li><strong>Rear Toe-Link Setup:</strong> Borrowed from GT500 for enhanced stability under hard acceleration</li>
+          <li><strong>Larger Sway Bars:</strong> Reduced body roll in corners while maintaining ride quality on the street</li>
+          <li><strong>Track-Tuned Springs:</strong> Specific spring rates balance comfort with performance capabilities</li>
+          <li><strong>Strut Tower Brace:</strong> Increased chassis rigidity improves handling precision</li>
+          <li><strong>Selectable Drive Modes:</strong> Normal, Snow/Wet, Sport, Track, and Drag Strip modes optimize performance</li>
+          <li><strong>Electronic Line Lock:</strong> Heats rear tires for maximum traction during drag racing launches</li>
+        </ul>
+      </div>
+
+      <div class="detail-section">
+        <h3>Braking & Wheels</h3>
+        <ul>
+          <li><strong>Brembo Brakes:</strong> High-performance 6-piston front calipers with 15.0-inch rotors</li>
+          <li><strong>Rear Brakes:</strong> Single-piston calipers with 13.9-inch rotors provide balanced stopping power</li>
+          <li><strong>Michelin Pilot Sport 4S:</strong> Standard ultra-high-performance summer tires (255/40R19 front, 275/40R19 rear)</li>
+          <li><strong>Brake Cooling Ducts:</strong> Front brake ducts channel air for consistent performance during track sessions</li>
+          <li><strong>ABS with Track Mode:</strong> Allows for later braking and more aggressive driving on circuit</li>
+          <li><strong>Electronic Parking Brake:</strong> Space-saving design with auto-hold function</li>
+          <li><strong>Torque Vectoring:</strong> Brake-based system improves cornering agility and reduces understeer</li>
+          <li><strong>Launch Control:</strong> Optimizes acceleration from a standstill for consistent drag strip runs</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIND YOURS CTA -->
+  <section id="find-yours" class="find-yours">
+    <h2>Find Your Mach 1</h2>
+    <p>Browse available 2023 Ford Mustang Mach 1 listings in the Houston, Texas area</p>
+    <a href="listings.html" class="find-button">View Houston Area Listings</a>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">Mustang <span>'69</span></div>
-    <p class="footer-tagline">Ford Motor Company · SportsRoof Fastback</p>
-    <div class="footer-bottom">
-      A fan tribute page — not affiliated with Ford Motor Company. Built with HTML, CSS & love for classics.
-    </div>
+    <p>2023 Ford Mustang Mach 1 Showcase • Not affiliated with Ford Motor Company • For informational purposes only</p>
   </footer>
 
 </body>
